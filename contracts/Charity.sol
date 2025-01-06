@@ -17,7 +17,7 @@ contract Charity{
 
     mapping(uint256 => Campaign) public campaigns;
     mapping(address => bool) public isAdmin;
-    uint256 public campaignCount = 1;
+    uint256 public campaignCount ;
 
     constructor() {
         isAdmin[msg.sender] = true;
@@ -34,22 +34,27 @@ contract Charity{
     }
 
     modifier campaignExists(uint256 _campaignId) {
-        require(_campaignId > 0 && _campaignId < campaignCount, "Campaign with this ID does not exist!");
+        require(_campaignId < campaignCount, "Campaign with this ID does not exist!");
+        _;
+    }
+
+    modifier validAddress(address _address) {
+        require(_address != address(0), "Invalid address!");
         _;
     }
 
     event CampaignCreated(uint256 indexed campaignId, string title, uint256 goal, address recipient);
     event DonationReceived(uint256 indexed campaignId, address donor, uint256 amount);
     event FundsReleased(uint256 indexed campaignId, address recipient, uint256 total);
+    event CampaignCanceled(uint256 indexed campaignId);
 
     function createCampaign(
         string memory _title,
         string memory _description,
         address _recipient,
         uint256 _goal
-    ) public onlyAdmin {
+    ) public onlyAdmin validAddress(_recipient) {
         require(bytes(_title).length != 0, "Invalid title!");
-        require(_recipient != address(0), "Invalid address!");
         require(_goal > 0, "Goal must be a positive value!");
 
         Campaign storage newCampaign = campaigns[campaignCount];
@@ -64,6 +69,13 @@ contract Charity{
 
         campaignCount++;
     }
+
+    function cancelCampaign(uint256 _campaignId) public onlyAdmin campaignExists(_campaignId) {
+    Campaign storage campaign = campaigns[_campaignId];
+    require(!campaign.isCompleted, "Campaign is already completed!");
+    campaign.isCompleted = true;
+    emit CampaignCanceled(_campaignId);
+}
 
     function getCampaign(uint256 _id) public view campaignExists(_id) returns(
         string memory title,
@@ -105,16 +117,30 @@ contract Charity{
         }
     }
 
+    function getDonationAmountByDonor(uint256 _campaignId, address _donor) public view campaignExists(_campaignId) returns (uint256) {
+        return campaigns[_campaignId].donations[_donor];
+    }
+
     function releaseFunds(uint256 _campaignId) internal campaignExists(_campaignId) {
         Campaign storage campaign = campaigns[_campaignId];
 
         require(campaign.totalDonated > 0, "There is nothing to release!");
-        require(campaign.isCompleted == true, "Campaign is not completed yet!");
+        require(campaign.totalDonated >= campaign.goal, "Goal has not been met!");
+        require(!campaign.isCompleted, "Campaign already completed!");
 
-        campaign.isCompleted == true;
+        campaign.isCompleted = true;
         
         payable(campaign.recipient).transfer(campaign.totalDonated);
 
         emit FundsReleased(_campaignId, campaign.recipient, campaign.totalDonated);
+    }
+
+    function addAdmin(address _newAdmin) public onlyAdmin validAddress(_newAdmin) {
+        require(!isAdmin[_newAdmin], "The user is already an admin!");
+        isAdmin[_newAdmin] = true;
+    }
+
+    receive() external payable {
+        revert("Direct deposits not allowed!");
     }
 }
