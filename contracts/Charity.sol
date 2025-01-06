@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.28;
 
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+
 contract Charity{
 
      struct Campaign {
@@ -98,7 +100,7 @@ contract Charity{
         );
     }
 
-    function donate(uint256 _campaignId) public payable validDonation(msg.value) campaignExists(_campaignId) {
+    function donate(uint256 _campaignId) public payable validDonation(msg.value) campaignExists(_campaignId) nonReentrant {
         Campaign storage campaign = campaigns[_campaignId];
 
         require(campaign.isCompleted == false, "Campaign is completed!");
@@ -121,7 +123,11 @@ contract Charity{
         return campaigns[_campaignId].donations[_donor];
     }
 
-    function releaseFunds(uint256 _campaignId) internal campaignExists(_campaignId) {
+    function getDonationAmountByDonor(uint256 _campaignId, address _donor) public view campaignExists(_campaignId) returns (uint256) {
+        return campaigns[_campaignId].donations[_donor];
+    }
+
+    function releaseFunds(uint256 _campaignId) internal campaignExists(_campaignId) nonReentrant {
         Campaign storage campaign = campaigns[_campaignId];
 
         require(campaign.totalDonated > 0, "There is nothing to release!");
