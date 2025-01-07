@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.28;
 
-import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 
-contract Charity{
+contract Charity is ReentrancyGuard {
 
      struct Campaign {
         string title;
@@ -123,10 +123,6 @@ contract Charity{
         return campaigns[_campaignId].donations[_donor];
     }
 
-    function getDonationAmountByDonor(uint256 _campaignId, address _donor) public view campaignExists(_campaignId) returns (uint256) {
-        return campaigns[_campaignId].donations[_donor];
-    }
-
     function releaseFunds(uint256 _campaignId) internal campaignExists(_campaignId) nonReentrant {
         Campaign storage campaign = campaigns[_campaignId];
 
@@ -144,6 +140,11 @@ contract Charity{
     function addAdmin(address _newAdmin) public onlyAdmin validAddress(_newAdmin) {
         require(!isAdmin[_newAdmin], "The user is already an admin!");
         isAdmin[_newAdmin] = true;
+    }
+
+    function removeAdmin(address _admin) public onlyAdmin validAddress(_admin) {
+        require(isAdmin[_admin], "The user is not an admin!");
+        isAdmin[_admin] = false;
     }
 
     receive() external payable {
