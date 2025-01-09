@@ -49,6 +49,7 @@ contract Charity is ReentrancyGuard {
     event DonationReceived(uint256 indexed campaignId, address donor, uint256 amount);
     event FundsReleased(uint256 indexed campaignId, address recipient, uint256 total);
     event CampaignCanceled(uint256 indexed campaignId);
+    event goalMet(uint256 indexed campaignId);
 
     function createCampaign(
         string memory _title,
@@ -115,7 +116,7 @@ contract Charity is ReentrancyGuard {
         emit DonationReceived(_campaignId, msg.sender, msg.value);
 
         if(campaign.totalDonated >= campaign.goal) {
-            releaseFunds(_campaignId);
+            emit goalMet(_campaignId);
         }
     }
 
@@ -123,7 +124,7 @@ contract Charity is ReentrancyGuard {
         return campaigns[_campaignId].donations[_donor];
     }
 
-    function releaseFunds(uint256 _campaignId) internal campaignExists(_campaignId) nonReentrant {
+    function releaseFunds(uint256 _campaignId) public campaignExists(_campaignId) onlyAdmin nonReentrant {
         Campaign storage campaign = campaigns[_campaignId];
 
         require(campaign.totalDonated > 0, "There is nothing to release!");
@@ -132,7 +133,8 @@ contract Charity is ReentrancyGuard {
 
         campaign.isCompleted = true;
         
-        payable(campaign.recipient).transfer(campaign.totalDonated);
+        (bool sent, ) = campaign.recipient.call{value: campaign.totalDonated}("");
+        require(sent, "Failed to send funds");
 
         emit FundsReleased(_campaignId, campaign.recipient, campaign.totalDonated);
     }
