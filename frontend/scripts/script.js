@@ -1,24 +1,17 @@
 import { ethers } from "https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.min.js";
 import { abi } from "./abi.js";
 
-// const provider = new ethers.BrowserProvider(window.ethereum)
-// const signer = provider.getSigner()
-// const contractAddress = "0x6263CD997403dBCC6A457b9594601947eb3F6Acd";
-// const contract = new ethers.Contract(contractAddress, abi, signer);
-
 const provider = new ethers.BrowserProvider(window.ethereum)
 const contractAddress = "0x6263CD997403dBCC6A457b9594601947eb3F6Acd";
 let signer;
 let contract;
-console.log("Provider:", provider);
-console.log("Signer:", signer);
-console.log("Contract:", contract);
 
 async function initContract() {
-  signer = await provider.getSigner();
-  contract = new ethers.Contract(contractAddress, abi, signer);
+  if (!contract) {
+    signer = await provider.getSigner();
+    contract = new ethers.Contract(contractAddress, abi, signer);
+  }
 }
-
 async function checkMetaMask() {
     if (typeof window.ethereum === 'undefined') {
       alert('Please set up MetaMask first.');

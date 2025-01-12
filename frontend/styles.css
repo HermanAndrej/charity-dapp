@@ -1,4 +1,12 @@
-/* General Styles */
+:root {
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --danger-color: #dc3545;
+  --success-color: #28a745;
+  --text-color: #333;
+  --background-color: #f4f4f9;
+}
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -131,7 +139,6 @@ a {
   padding: 12px 25px;
 }
 
-/* Campaigns Page */
 .campaigns-page {
   padding: 50px;
 }
@@ -167,10 +174,6 @@ a {
   color: #333;
 }
 
-.admin-section {
-  margin-top: 50px;
-}
-
 .create-campaign,
 .manage-admins {
   margin-bottom: 30px;
@@ -195,6 +198,8 @@ a {
 
 .campaign-page {
   padding: 50px;
+  display: flex;
+  flex-direction: column;
 }
 
 .details h1 {
@@ -224,7 +229,7 @@ a {
 }
 
 .donor-history {
-  margin-top: 50px;
+  margin-top: 20px;
 }
 
 .donor-history table {
@@ -273,4 +278,37 @@ input, textarea {
   margin: 10px 0;
   border-radius: 5px;
   border: 1px solid #ccc;
+}
+
+.campaign-page button {
+  margin-bottom: 15px;
+}
+
+.campaigns-page h2 {
+  text-align: center;
+  color: var(--text-color);
+  margin-bottom: 30px;
+}
+
+.details {
+  margin-bottom: 20px;
+}
+
+.donor-history table tbody tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+@media (max-width: 768px) {
+  .campaign-card {
+    width: 100%;
+    margin: 10px 0;
+  }
+}
+
+.button-group {
+  margin-top: 20px;
+}
+
+.button-group button {
+  margin-bottom: 10px;
 }
