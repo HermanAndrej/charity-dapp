@@ -86,8 +86,7 @@ This project provided a hands-on experience with:
 
 The experience highlights the power of blockchain in creating solutions that prioritize security, transparency, and efficiency.  
 
----
-is Project  
+--- 
 
 The **Charity dApp** was created as part of a university project to showcase the potential of blockchain technology in developing secure, transparent, and decentralized applications. It reflects a deep understanding of blockchain fundamentals, smart contract development, and real-world problem-solving through technology.  
 
