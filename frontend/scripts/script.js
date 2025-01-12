@@ -10,8 +10,37 @@ async function initContract() {
   if (!contract) {
     signer = await provider.getSigner();
     contract = new ethers.Contract(contractAddress, abi, signer);
+    await setupEventListeners();
   }
 }
+
+async function setupEventListeners() {
+  contract.on("CampaignCreated", (campaignId, title, goal, recipient, event) => {
+    console.log(`Campaign Created: ID ${campaignId}, Title ${title}, Goal ${ethers.formatEther(goal)}, Recipient ${recipient}`);
+    alert(`New campaign created: ${title}`);
+  });
+
+  // contract.on("DonationReceived", (campaignId, donor, amount, event) => {
+  //   console.log(`Donation Received: Campaign ${campaignId}, Donor ${donor}, Amount ${ethers.formatEther(amount)}`);
+  //   alert(`Donation received for campaign ${campaignId} from ${donor}: ${ethers.formatEther(amount)} ETH`);
+  // });
+
+  contract.on("FundsReleased", (campaignId, recipient, total, event) => {
+    console.log(`Funds Released: Campaign ${campaignId}, Recipient ${recipient}, Total ${ethers.formatEther(total)}`);
+    alert(`Funds released for campaign ${campaignId}: ${ethers.formatEther(total)} ETH to ${recipient}`);
+  });
+
+  contract.on("CampaignCanceled", (campaignId, event) => {
+    console.log(`Campaign Canceled: ID ${campaignId}`);
+    alert(`Campaign ${campaignId} has been canceled.`);
+  });
+
+  // contract.on("goalMet", (campaignId, event) => {
+  //   console.log(`Goal Met: Campaign ${campaignId}`);
+  //   alert(`Campaign ${campaignId} has reached its goal!`);
+  // });
+}
+
 async function checkMetaMask() {
     if (typeof window.ethereum === 'undefined') {
       alert('Please set up MetaMask first.');
@@ -219,7 +248,6 @@ async function checkMetaMask() {
     try {
       const tx = await contract.createCampaign(name, description, recipient, ethers.parseEther(goal.toString()));
       await tx.wait();
-      alert('Campaign created successfully!');
       window.location.href = "campaigns.html";
     } catch (error) {
       console.error('Error creating campaign:', error);
