@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Landing Page</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="landing-page">
+    <div class="welcome-message">
+      <h2>Welcome, <span id="user-address">User Address</span></h2>
+      <p>Your balance: <span id="balance">0</span> ETH (~<span id="usd-equivalent">0</span>)</p>
+      <p>Connected to Sepolia Testnet</p>
+    </div>
+    <div class="button-row">
+      <button id="browse-campaigns" class="btn btn-secondary">Browse Campaigns</button>
+      <button id="logout-button" class="btn btn-danger">Logout</button>
+    </div>
+    <div id="admin-button-section" style="display: none; margin-top: 20px; text-align: center;">
+      <a href="admin.html">
+        <button id="go-to-admin" class="btn btn-primary">Go to Admin Dashboard</button>
+      </a>
+    </div>
+  </div>
+  </div>
+  <script type="module" src="scripts/script.js"></script>
+</body>
+</html>

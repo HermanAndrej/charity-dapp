@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campaign Details</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="campaign-page">
+    <a href="campaigns.html">
+      <button id="back-button" class="btn btn-secondary">&larr; Go Back</button>
+    </a>
+    <div class="details">
+      <h1 id="campaign-name">Campaign Name</h1>
+      <p id="campaign-description">Full Description</p>
+      <p><strong>Goal:</strong> <span id="campaign-goal">0</span> ETH</p>
+      <p><strong>Progress:</strong> <span id="campaign-progress">0</span> ETH</p>
+      <p><strong>Status:</strong> <span id="campaign-status">Ongoing</span></p>
+      <p><strong>Recipient:</strong> <span id="campaign-recipient">Recipient Address</span></p>
+      <p><strong>Created On:</strong> <span id="campaign-created">Date and Time</span></p>
+
+      <div class="donation-form">
+        <label for="donation-amount">Donation Amount (ETH):</label>
+        <input id="donation-amount" type="number" placeholder="Enter donation amount" required />
+        <button id="donate-button" class="btn btn-primary">Donate</button>
+      </div>
+    </div>
+
+    <button id="cancel-campaign-button" class="btn btn-danger" style="display: none;">Cancel Campaign</button>
+    <button id="release-funds-button" class="btn btn-success" style="display: none;">Release Funds</button>
+
+    <div class="donor-history">
+      <h3>Donation History</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Donor</th>
+            <th>Amount (ETH)</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody id="donor-history">
+          <tr>
+            <td colspan="3">No donations yet.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script type="module" src="scripts/script.js"></script>
+</body>
+</html>

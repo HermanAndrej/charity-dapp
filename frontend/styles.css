@@ -1,0 +1,276 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #f4f4f9;
+}
+
+h1, h2, h3 {
+  color: #333;
+}
+
+p {
+  font-size: 1rem;
+  color: #555;
+}
+
+button {
+  cursor: pointer;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.btn {
+  padding: 10px 15px;
+  font-size: 1rem;
+  border-radius: 5px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+.btn-success {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+}
+
+/* Index Page */
+.index-page {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.content-center h1 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+.content-center p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+#login-button {
+  font-size: 1.2rem;
+  padding: 15px 30px;
+}
+
+/* Landing Page */
+.landing-page {
+  text-align: center;
+  padding: 50px;
+}
+
+.welcome-message h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.welcome-message p {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+}
+
+.button-row {
+  margin-top: 30px;
+}
+
+.button-row button {
+  font-size: 1.1rem;
+  margin: 0 10px;
+  padding: 12px 25px;
+}
+
+/* Campaigns Page */
+.campaigns-page {
+  padding: 50px;
+}
+
+.campaign-listings {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.campaign-card {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin: 10px;
+  padding: 20px;
+  width: 250px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.campaign-card:hover {
+  transform: scale(1.05);
+}
+
+.campaign-card h3 {
+  font-size: 1.5rem;
+  color: #007bff;
+}
+
+.campaign-card p {
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.admin-section {
+  margin-top: 50px;
+}
+
+.create-campaign,
+.manage-admins {
+  margin-bottom: 30px;
+}
+
+.create-campaign input,
+.create-campaign textarea,
+.manage-admins input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.create-campaign button,
+.manage-admins button {
+  width: 100%;
+  padding: 12px;
+  font-size: 1.2rem;
+}
+
+.campaign-page {
+  padding: 50px;
+}
+
+.details h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.details p {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+.donation-form {
+  margin-top: 30px;
+}
+
+.donation-form input {
+  padding: 12px;
+  font-size: 1rem;
+  margin-right: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.donation-form button {
+  padding: 12px 20px;
+}
+
+.donor-history {
+  margin-top: 50px;
+}
+
+.donor-history table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.donor-history th, .donor-history td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+}
+
+.donor-history th {
+  background-color: #f8f9fa;
+}
+
+.admin-dashboard {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 90%;
+  max-width: 800px;
+  margin: auto;
+}
+
+.admin-dashboard h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.create-campaign, .manage-admins {
+  margin-bottom: 30px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}

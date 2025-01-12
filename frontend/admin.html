@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="admin-dashboard">
+      <a href="landing.html">
+        <button id="back-button" class="btn btn-secondary">&larr; Go Back</button>
+      </a>
+      <h1>Admin Dashboard</h1>
+  
+      <div class="create-campaign">
+        <h2>Create New Campaign</h2>
+        <form id="create-campaign-form">
+          <input type="text" id="campaign-title" placeholder="Campaign Title" required />
+          <textarea id="campaign-description" placeholder="Campaign Description" required></textarea>
+          <input type="text" id="campaign-recipient" placeholder="Recipient Address" required />
+          <input type="text" id="campaign-goal" placeholder="Goal (ETH)" required pattern="^\d+(\.\d{1,18})?$" title="Enter a valid decimal number" />
+          <button id="create-campaign-button" type="submit" class="btn btn-primary">Create Campaign</button>
+        </form>
+      </div>
+  
+      <div class="manage-admins">
+        <h2>Manage Admins</h2>
+        <form id="manage-admins-form">
+          <input type="text" id="admin-address" placeholder="Enter Admin Address" required />
+          <button type="button" id="add-admin-button" class="btn btn-success">Add Admin</button>
+          <button type="button" id="remove-admin-button" class="btn btn-danger">Remove Admin</button>
+        </form>
+      </div>
+    </div>
+  
+    <script type="module" src="scripts/script.js"></script>
+  </body>
+</html>

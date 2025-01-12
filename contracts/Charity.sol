@@ -74,11 +74,11 @@ contract Charity is ReentrancyGuard {
     }
 
     function cancelCampaign(uint256 _campaignId) public onlyAdmin campaignExists(_campaignId) {
-    Campaign storage campaign = campaigns[_campaignId];
-    require(!campaign.isCompleted, "Campaign is already completed!");
-    campaign.isCompleted = true;
-    emit CampaignCanceled(_campaignId);
-}
+        Campaign storage campaign = campaigns[_campaignId];
+        require(!campaign.isCompleted, "Campaign is already completed!");
+        campaign.isCompleted = true;
+        emit CampaignCanceled(_campaignId);
+    }
 
     function getCampaign(uint256 _id) public view campaignExists(_id) returns(
         string memory title,
@@ -148,6 +148,19 @@ contract Charity is ReentrancyGuard {
         require(isAdmin[_admin], "The user is not an admin!");
         isAdmin[_admin] = false;
     }
+    
+    function isAdminStatus(address _user) public view returns (bool) {
+        return isAdmin[_user];
+    }
+
+    function getCampaignCount() public view returns (uint256) {
+        return campaignCount;
+    }
+
+    function getDonors(uint256 _campaignId) public view campaignExists(_campaignId) returns (address[] memory) {
+        return campaigns[_campaignId].donors;
+    }
+
 
     receive() external payable {
         revert("Direct deposits not allowed!");
