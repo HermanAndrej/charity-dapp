@@ -2,11 +2,13 @@
 
 **Charity dApp** is a decentralized application developed as a university project. It is built on the Ethereum blockchain (Sepolia testnet).
 
+**[Live Demo](https://frolicking-boba-0ea878.netlify.app/)**
+
 ---
 
 ## Project Overview  
 
-This project demonstrates how blockchain technology can be applied to solve real-world problems, such as the lack of transparency in charitable giving. The platform is designed with a focus on security, transparency, and ease of use, making it an excellent case study for the practical applications of decentralized technologies.  
+This project demonstrates how blockchain technology can be applied to solve real-world problems, such as the lack of transparency in charitable giving. The platform is designed with a focus on security, transparency, and ease of use, making it an excellent case study for the practical applications of decentralized technologies. The emphasis was put on the blockchain backend and communication between frontend and blockchain, design was made as simple as possible.
 
 ---
 
